@@ -65,7 +65,7 @@
 			<visual>
 				<origin xyz = "0, 0, 0" rpy = "1.57, 0, 0"/>
 				<geometry>
-					<cylinder len = "0.03" radius = "0.05">
+				  <cylinder len = "0.03" radius = "0.05">
 				</geometry>
 				<material name = "red"/>
 			</visual>
@@ -198,7 +198,7 @@
     </joint>
     <link name="${prefix}_tip">
       	<visual>
-        	<origin rpy="${(reflect-1)/2*1.57} 0 0" xyz=" "/>
+        	<origin rpy="${(reflect-1)/2*1.57} 0 0" xyz="0.09137 0.00495 0 "/>
         	<geometry>
           <mesh filename="package://urdf_tutorial/meshes/l_finger_tip.dae"/>
         	</geometry>
@@ -207,7 +207,7 @@
         	<geometry>
           	<mesh filename="package://urdf_tutorial/meshes/l_finger_tip.dae"/>
         	</geometry>
-        	<origin rpy="${(reflect-1)/2*1.57} 0 0" xyz=" "/>
+        	<origin rpy="${(reflect-1)/2*1.57} 0 0" xyz=" 0.09137 0.00495 0"/>
       	</collision>
       	<xacro:default_inertial mass="0.05"/>
     	</link>
@@ -248,41 +248,46 @@
   </joint>
 	<gazebo>
     	<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-      		<robotNamespace>/mugator_manip</robotNamespace>
+      	<robotNamespace>/</robotNamespace>
     		<robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
     		<legacyModeNS>true</legacyModeNS>
     	</plugin>
-    </gazebo>
+  </gazebo>
    	<gazebo reference="camera">
-    	<material>Gazebo/Blue</material>
+      <material>Gazebo/Blue</material>
     	<sensor type="camera" name="camera">
-      		<update_rate>20.0</update_rate>
+        <update_rate>20.0</update_rate>
       		<camera name="head">
-        		<horizontal_fov>1.3962634</horizontal_fov>
-        		<image>
-          			<width>600</width>
-          			<height>600</height>
-          			<format>R8G8B8</format>
-        		</image>
-        		<clip>
-	          		<near>0.03</near>
-    	      		<far>250</far>
-        		</clip>
+        	  <horizontal_fov>1.3962634</horizontal_fov>
+        	  <image>
+              <width>600</width>
+          	  <height>600</height>
+          	  <format>R8G8B8</format>
+        	  </image>
+
+            <save enabled>
+              <path > /home/aanal/robot_ws</path>
+            </save>
+
+           	<clip>
+	             <near>0.03</near>
+    	         <far>250</far>
+        	  </clip>
       		</camera>
 
 	      	<plugin name="camera_controller" filename="libgazebo_ros_camera.so">
-			      <alwaysOn>true</alwaysOn>
-	              <updateRate>0.0</updateRate>
-    	   	  	  <cameraName>my_robot/camera</cameraName>
-        	  	  <imageTopicName>image_raw</imageTopicName>
- 	          	  <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-    	      	  <frameName>camera</frameName>
-        	  	  <hackBaseline>0.07</hackBaseline>
- 	          	  <distortionK1>0.0</distortionK1>
-          	  	  <distortionK2>0.0</distortionK2>
-              	  <distortionK3>0.0</distortionK3>
-              	  <distortionT1>0.0</distortionT1>
-            	  <distortionT2>0.0</distortionT2>
+			       <alwaysOn>true</alwaysOn>
+	           <updateRate>0.0</updateRate>
+    	   	   <cameraName>my_robot/camera</cameraName>
+        	   <imageTopicName>image_raw</imageTopicName>
+ 	           <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+    	       <frameName>camera</frameName>
+        	   <hackBaseline>0.07</hackBaseline>
+ 	           <distortionK1>0.0</distortionK1>
+          	 <distortionK2>0.0</distortionK2>
+             <distortionK3>0.0</distortionK3>
+             <distortionT1>0.0</distortionT1>
+             <distortionT2>0.0</distortionT2>
         	</plugin>
     	</sensor>
   </gazebo>
